@@ -1,5 +1,8 @@
-# kennzd-rust
-Rust-Anwendung (HTML-UI und REST-Service) zum Abfragen von KFZ-Kennzeichen anhand ihres Kürzels.
+# 🚗 KennzD 🇩🇪 
+
+Webanwendung (HTML-UI und REST-Service) zum Abfragen von KFZ-Kennzeichen anhand ihres Kürzels.
+
+Powered by Rust 🦀 & Rocket 🚀
 
 ## Voraussetzungen:
 
