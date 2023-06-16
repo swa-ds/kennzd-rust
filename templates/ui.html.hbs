@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+    <title>🚗 KennzD 🇩🇪</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<div>
+    <h1>🚗 KennzD 🇩🇪</h1>
+    <p>Kennzeichen-Kürzel:</p>
+    <form method="get" action="ui">
+        <input
+                name="kuerzel" type="text"
+                value="{{#if kennzeichen }}{{ kennzeichen.kuerzel }}{{else}}''{{/if}}"
+                autofocus onFocus="this.select();"/>
+        <input type="submit" value="Suchen"/>
+    </form>
+    <br/>
+    <table>
+        <tr>
+            <td>K&uuml;rzel:</td>
+            <td>{{ kennzeichen.kuerzel }}</td>
+        </tr>
+        <tr>
+            <td>Stadt / Kreis:</td>
+            <td>{{ kennzeichen.stadt }}</td>
+        </tr>
+        <tr>
+            <td>Sitz:</td>
+            <td>{{ kennzeichen.sitz }}</td>
+        </tr>
+        <tr>
+            <td>Bundesland:</td>
+            <td>{{ kennzeichen.bundesland }}</td>
+        </tr>
+        <tr>
+            <td>Vergabe:</td>
+            <td>{{ kennzeichen.vergabe }}</td>
+        </tr>
+        {{#if kennzeichen.neuvergabe}}
+        <tr>
+            <td>Neuvergabe:</td>
+            <td>{{ kennzeichen.neuvergabe }}</td>
+        </tr>
+        {{/if}}
+    </table>
+    {{#if kennzeichen.ausgelaufen }}
+    <p>Ausgelaufenes Kennzeichen, optional wieder zugeteilt.</p>
+    {{/if}}
+</body>
+</div>
+<div>
+<p><i>Powered by Rust </i>🦀<i> & Rocket </i>🚀</p>
+</div>
+</html>
