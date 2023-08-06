@@ -1,4 +1,4 @@
-FROM rust:1.66 as build
+FROM rust:1.71 as build
 
 # create a new empty shell project
 RUN USER=root cargo new --bin kennzd
@@ -23,7 +23,7 @@ RUN cargo build --release
 RUN cargo test --release
 
 # our final base
-FROM debian:buster-slim
+FROM debian:bullseye
 
 # copy the build artifact from the build stage
 COPY --from=build /kennzd/target/release/kennzd .
