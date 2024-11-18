@@ -6,23 +6,23 @@ Powered by Rust 🦀 & Rocket 🚀
 
 ## Voraussetzungen:
 
-* Rust 1.66
-* Docker bzw. Docker Desktop für Windows
+* Rust 1.82
+* Docker (für Deployment)
 
 ## Anwendung lokal bauen und ausführen
 Bauen:
 ```shell script
-> cargo build
+cargo build
 ```
 
 Tests ausführen:
 ```shell script
-> cargo test
+cargo test
 ```
 
 Anwendung starten:
 ```shell script
-> cargo run
+cargo run
 ```
 
 Aufruf im Browser: http://localhost:8000
@@ -40,12 +40,12 @@ http://localhost:8000/api/kennzeichen/RV
 ## Docker-Image bauen:
 
 ```shell script
-> docker build . -t swa/kennzd
+docker build . -t swa/kennzd
 ```
 
 Docker-Image starten:
 ```shell script
-> docker run -d --rm --name kennzd -p 80:8000 swa/kennzd
+docker run -d --rm --name kennzd -p 80:8000 swa/kennzd
 ```
 Aufruf im Browser: http://localhost
 
@@ -53,8 +53,8 @@ Aufruf im Browser: http://localhost
 
 Image auf [fly.io](https://fly.io/) als Anwendung `kennzd` deployen (mit flyctl):
 ```shell script
-> flyctl auth login
-> flyctl deploy 
+flyctl auth login
+flyctl deploy 
 ```
 ### Aufruf im Browser
 
