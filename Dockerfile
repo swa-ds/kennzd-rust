@@ -28,7 +28,7 @@ COPY --from=build /build/Rocket.tom[l] ./static
 COPY --from=build /build/stati[c] ./static
 COPY --from=build /build/template[s] ./templates
 
-## ensure the container listens globally on port 8080
+## ensure the container listens globally on port 8000
 ENV ROCKET_ADDRESS=0.0.0.0
 ENV ROCKET_PORT=8000
 
