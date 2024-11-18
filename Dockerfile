@@ -1,35 +1,35 @@
-FROM rust:1.82 as build
+FROM docker.io/rust:1-slim-bookworm AS build
 
-# create a new empty shell project
-RUN USER=root cargo new --bin kennzd
-WORKDIR /kennzd
+## cargo package name: customize here or provide via --build-arg
+ARG pkg=kennzd
 
-# copy over your manifests
-COPY ./Cargo.lock ./Cargo.lock
-COPY ./Cargo.toml ./Cargo.toml
-COPY ./rust-toolchain.toml ./rust-toolchain.toml
+WORKDIR /build
 
-# this build step will cache your dependencies
-RUN cargo build --release
-RUN rm src/*.rs
+COPY . .
 
-# copy your source tree
-COPY ./src ./src
-COPY ./resources ./resources
+RUN --mount=type=cache,target=/build/target \
+    --mount=type=cache,target=/usr/local/cargo/registry \
+    --mount=type=cache,target=/usr/local/cargo/git \
+    set -eux; \
+    cargo build --release; \
+    objcopy --compress-debug-sections target/release/$pkg ./main
 
-# build for release
-RUN rm ./target/release/deps/kennzd*
-RUN cargo build --release
-RUN cargo test --release
+################################################################################
 
-# our final base
-FROM debian:bullseye
+FROM docker.io/debian:bookworm-slim
 
-# copy the build artifact from the build stage
-COPY --from=build /kennzd/target/release/kennzd .
-COPY ./templates ./templates
+WORKDIR /app
 
-# set the startup command to run your binary
-#ENV ROCKET_LOG_LEVEL=normal
-ENV ROCKET_ADDRESS="0.0.0.0"
-CMD ["./kennzd"]
+## copy the main binary
+COPY --from=build /build/main ./
+
+## copy runtime assets which may or may not exist
+COPY --from=build /build/Rocket.tom[l] ./static
+COPY --from=build /build/stati[c] ./static
+COPY --from=build /build/template[s] ./templates
+
+## ensure the container listens globally on port 8080
+ENV ROCKET_ADDRESS=0.0.0.0
+ENV ROCKET_PORT=8000
+
+CMD ./main
