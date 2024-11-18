@@ -1,4 +1,4 @@
-FROM rust:1.71 as build
+FROM rust:1.82 as build
 
 # create a new empty shell project
 RUN USER=root cargo new --bin kennzd
