@@ -2,7 +2,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 10px;
     box-sizing: border-box;
     line-height: 1.6;
     background-color: #f4f4f9;
@@ -14,100 +14,179 @@ body {
     min-height: 100vh;
 }
 
-/* Container */
-div {
+/* Karte (Formular + Ergebnis) */
+.card {
     width: 100%;
     max-width: 600px;
     background: #fff;
-    padding: 20px;
+    padding: 16px;
     margin: 0 auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    box-sizing: border-box;
 }
 
 /* Titel */
 h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     text-align: center;
     color: #0078d7;
     margin: 10px 0;
 }
 
 /* Eingabeformular */
-form {
+.lookup-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-top: 10px;
 }
 
-form input[type="text"] {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.lookup-input,
+.lookup-submit {
+    font-size: 16px; /* verhindert Auto-Zoom bei Fokus in iOS Safari */
+    min-height: 44px; /* Tap-Target-Größe */
+    padding: 10px 12px;
     box-sizing: border-box;
+    border-radius: 4px;
 }
 
-form input[type="submit"] {
+.lookup-input {
     width: 100%;
-    padding: 12px;
-    font-size: 1rem;
+    border: 1px solid #ddd;
+}
+
+.lookup-submit {
+    width: 100%;
     background-color: #0078d7;
     color: white;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-form input[type="submit"]:hover {
+.lookup-submit:hover {
     background-color: #005bb5;
 }
 
-/* Tabelle */
-table {
+/* Ergebnistabelle */
+.result-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
-table td {
+.result-table td {
     padding: 10px;
     border: 1px solid #ddd;
 }
 
-table td:first-child {
+.result-table td:first-child {
     font-weight: bold;
     background-color: #f8f8f8;
 }
 
-/* Fußnote */
-div:last-of-type {
+.hint-text {
+    margin-top: 10px;
+}
+
+/* Fußzeile */
+.footer {
+    width: 100%;
+    max-width: 600px;
     text-align: center;
     font-size: 0.8rem;
     color: #666;
     margin-top: 20px;
+    padding: 0 16px;
+    box-sizing: border-box;
 }
 
-/* Responsive Design */
+/* Smartphone (bis 600px): Ergebnistabelle als gestapelte Mini-Karten */
 @media (max-width: 600px) {
+    .result-table,
+    .result-table tbody,
+    .result-table tr,
+    .result-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .result-table tr {
+        margin-bottom: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .result-table td {
+        border: none;
+        padding: 8px 12px;
+    }
+
+    .result-table td:first-child {
+        border-bottom: 1px solid #ddd;
+    }
+}
+
+/* Tablet (601px – 1024px): Formular in einer Zeile, Tabelle wieder zweispaltig */
+@media (min-width: 601px) {
     body {
-        padding: 10px;
+        padding: 20px;
+    }
+
+    .card {
+        padding: 24px;
     }
 
     h1 {
-        font-size: 1.8rem;
+        font-size: 2.1rem;
     }
 
-    table td {
-        font-size: 0.85rem;
+    .lookup-form {
+        flex-direction: row;
     }
 
-    form input[type="text"], form input[type="submit"] {
+    .lookup-input {
+        flex: 1;
+    }
+
+    .lookup-submit {
+        width: auto;
+        flex: 0 0 auto;
+        min-width: 120px;
+    }
+
+    .result-table {
         font-size: 0.95rem;
-        padding: 10px;
+    }
+}
+
+/* Desktop (ab 1025px): großzügigere Karte und Typografie */
+@media (min-width: 1025px) {
+    .card {
+        max-width: 720px;
+        padding: 32px;
+    }
+
+    .footer {
+        max-width: 720px;
+    }
+
+    body {
+        padding: 32px;
+    }
+
+    h1 {
+        font-size: 2.4rem;
+    }
+
+    .result-table {
+        font-size: 1rem;
+    }
+
+    .result-table td {
+        padding: 12px;
     }
 }

@@ -1,56 +1,59 @@
 <!doctype html>
-<html>
+<html lang="de">
 <head>
-    <title>🚗 KennzD 🇩🇪</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>🚗 KennzD 🇩🇪</title>
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 </head>
 <body>
-<div>
-    <h1>🚗 KennzD 🇩🇪</h1>
-    <p>Kennzeichen-Kürzel:</p>
-    <form method="get" action="ui">
-        <input
-                name="kuerzel" type="text"
-                value="{{#if kennzeichen }}{{ kennzeichen.kuerzel }}{{else}}''{{/if}}"
-                autofocus onFocus="this.select();"/>
-        <input type="submit" value="Suchen"/>
-    </form>
-    <br/>
-    <table>
-        <tr>
-            <td>K&uuml;rzel:</td>
-            <td>{{ kennzeichen.kuerzel }}</td>
-        </tr>
-        <tr>
-            <td>Stadt / Kreis:</td>
-            <td>{{ kennzeichen.stadt }}</td>
-        </tr>
-        <tr>
-            <td>Sitz:</td>
-            <td>{{ kennzeichen.sitz }}</td>
-        </tr>
-        <tr>
-            <td>Bundesland:</td>
-            <td>{{ kennzeichen.bundesland }}</td>
-        </tr>
-        <tr>
-            <td>Vergabe:</td>
-            <td>{{ kennzeichen.vergabe }}</td>
-        </tr>
-        {{#if kennzeichen.neuvergabe}}
-        <tr>
-            <td>Neuvergabe:</td>
-            <td>{{ kennzeichen.neuvergabe }}</td>
-        </tr>
+    <div class="card">
+        <h1>🚗 KennzD 🇩🇪</h1>
+        <p>Kennzeichen-Kürzel:</p>
+        <form class="lookup-form" method="get" action="ui">
+            <input
+                    class="lookup-input"
+                    name="kuerzel" type="text"
+                    value="{{#if kennzeichen}}{{ kennzeichen.kuerzel }}{{/if}}"
+                    autofocus onFocus="this.select();"/>
+            <input class="lookup-submit" type="submit" value="Suchen"/>
+        </form>
+        {{#if kennzeichen.kuerzel}}
+        <table class="result-table">
+            <tr>
+                <td>K&uuml;rzel:</td>
+                <td>{{ kennzeichen.kuerzel }}</td>
+            </tr>
+            <tr>
+                <td>Stadt / Kreis:</td>
+                <td>{{ kennzeichen.stadt }}</td>
+            </tr>
+            <tr>
+                <td>Sitz:</td>
+                <td>{{ kennzeichen.sitz }}</td>
+            </tr>
+            <tr>
+                <td>Bundesland:</td>
+                <td>{{ kennzeichen.bundesland }}</td>
+            </tr>
+            <tr>
+                <td>Vergabe:</td>
+                <td>{{ kennzeichen.vergabe }}</td>
+            </tr>
+            {{#if kennzeichen.neuvergabe}}
+            <tr>
+                <td>Neuvergabe:</td>
+                <td>{{ kennzeichen.neuvergabe }}</td>
+            </tr>
+            {{/if}}
+        </table>
+        {{#if kennzeichen.ausgelaufen }}
+        <p class="hint-text">Ausgelaufenes Kennzeichen, optional wieder zugeteilt.</p>
         {{/if}}
-    </table>
-    {{#if kennzeichen.ausgelaufen }}
-    <p>Ausgelaufenes Kennzeichen, optional wieder zugeteilt.</p>
-    {{/if}}
+        {{/if}}
+    </div>
+    <div class="footer">
+        <p><i>Powered by Rust </i>🦀<i> & Rocket </i>🚀</p>
+    </div>
 </body>
-</div>
-<div>
-<p><i>Powered by Rust </i>🦀<i> & Rocket </i>🚀</p>
-</div>
 </html>
